@@ -15,8 +15,8 @@ Develop a Terraform module that can create the necessary AWS infrastructure for 
 
 ### Deliverables:
 * **Terraform Code:**
-    * A Terraform module directory with all necessary files (`main.tf`, `variables.tf`, `outputs.tf`, etc.).
-    * Terraform necessary files to spawn multiple WordPress instances (`main.tf`, `variables.tf`, `outputs.tf`, `terraform.tfvars`, etc.)
+    * A Terraform module directory with all necessary files (`main.tf`, `variables.tf`, `outputs.tf`, etc.). 
+    * The necessary Terraform files (`main.tf`, `variables.tf`, `outputs.tf`, `terraform.tfvars`, etc.) to deploy multiple WordPress instances using the defined module.
     * Example of `terraform.tfvars`:
 
       ```hcl
