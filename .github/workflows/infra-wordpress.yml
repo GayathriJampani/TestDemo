@@ -1,0 +1,52 @@
+name: Provision Infrastructure for wordpress
+
+on:
+    push:
+        paths:
+          - ./environments/dev/*
+          - ./environments/prod/*  
+    pull_request:
+        paths:
+          - ./environments/dev/*
+          - ./environments/prod/*
+    workflow_dispatch:
+        
+
+jobs:
+  dev:
+    name: Terraform Deploy to Development
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./environments/dev/*  # Set the working directory for dev
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: '1.5.0'  # Adjust the Terraform version if necessary
+
+      - name: Wordpress_key
+        env:
+          WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
+        run: |
+          echo "WORDPRESS_KEY" | base64 --decode > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
+          aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
+          aws-region: us-east-1
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+        
+  
