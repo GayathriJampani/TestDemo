@@ -11,7 +11,7 @@ resource "random_password" "db_password" {
 
 # Store database credentials in AWS Secrets Manager
 resource "aws_secretsmanager_secret" "db_credentials" {
-  name = "wordpress-db-credentials-${var.env}"
+  name = "wordpress-db-credentials-${var.env}-01"
 
   tags = {
     Environment = var.env

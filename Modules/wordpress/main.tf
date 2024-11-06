@@ -116,6 +116,7 @@ locals {
 data "aws_secretsmanager_secret_version" "db_credentials" {
   secret_id = var.db_credentials_secret_name
   version_stage = "AWSCURRENT"
+  depends_on = [ aws_secretsmanager_secret.db_credentials ]
 }
 
 resource "null_resource" "wordpress_provisioner" {
