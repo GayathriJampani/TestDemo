@@ -42,10 +42,12 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "Length of WORDPRESS_KEY: ${#WORDPRESS_KEY}"
-          echo "WORDPRESS_KEY" | base64 --decode > ~/.ssh/id_rsa 
+          echo "WORDPRESS_KEY" | base64 --decode > ~/.ssh/id_rsa
+          echo "$WORDPRESS_KEY" | base64 --decode > ~/.ssh/id_rsa || {
+            echo "Error decoding WORDPRESS_KEY"; exit 1;
+          }
+    
           chmod 600 ~/.ssh/id_rsa
-  
-
       - name: Terraform Init
         run: terraform init
 
