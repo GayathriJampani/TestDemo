@@ -29,6 +29,13 @@ jobs:
         with:
           terraform_version: '1.5.0'  # Adjust the Terraform version if necessary
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
+          aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
+          aws-region: us-east-1
+
       - name: Wordpress_key
         env:
           WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
@@ -36,12 +43,6 @@ jobs:
           echo "WORDPRESS_KEY" | base64 --decode > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: '${{ secrets.TF_USER_AWS_KEY }}'
-          aws-secret-access-key: '${{ secrets.TF_USER_AWS_SECRET }}'
-          aws-region: us-east-1
 
       - name: Terraform Init
         run: terraform init
