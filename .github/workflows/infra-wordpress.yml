@@ -2,13 +2,15 @@ name: Provision Infrastructure for wordpress
 
 on:
     push:
-        paths:
-          - ./environments/dev/*
-          - ./environments/prod/*  
-    pull_request:
-        paths:
-          - ./environments/dev/*
-          - ./environments/prod/*
+      branches:
+        - test
+    #     paths:
+    #       - ./environments/dev/*
+    #       - ./environments/prod/*  
+    # pull_request:
+    #     paths:
+    #       - ./environments/dev/*
+    #       - ./environments/prod/*
     workflow_dispatch:
         
 
