@@ -54,14 +54,14 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform validate
 
-      - name: Set up SSH Key for Terraform
-        env:
-          WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$WORDPRESS_KEY" | tr -d '\r' > ~/.ssh/wordpress.pem
-          chmod 600 ~/.ssh/wordpress.pem
-          ls -la ~/.ssh
+      # - name: Set up SSH Key for Terraform
+      #   env:
+      #     WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "$WORDPRESS_KEY" | tr -d '\r' > ~/.ssh/wordpress.pem
+      #     chmod 600 ~/.ssh/wordpress.pem
+      #     ls -la ~/.ssh
 
       - name: Terraform Plan
         env:
