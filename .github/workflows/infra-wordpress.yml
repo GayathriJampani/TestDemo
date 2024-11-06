@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./environments/dev/*  # Set the working directory for dev
+        working-directory: ./environments/dev/  # Set the working directory for dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
