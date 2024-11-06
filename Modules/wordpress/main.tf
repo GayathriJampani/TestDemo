@@ -126,7 +126,7 @@ resource "null_resource" "wordpress_provisioner" {
     type = "ssh"
     host = aws_instance.wordpress_instance.public_ip
     user = "ubuntu"
-    private_key = file(var.private_key_path)
+    private_key = var.private_key_path
   }
 
   provisioner "remote-exec" {
