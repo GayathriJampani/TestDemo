@@ -59,22 +59,23 @@ jobs:
           WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$WORDPRESS_KEY" | sed 's/ \\n /\n/g' > ~/.ssh/wordpress.pem
+          echo "$WORDPRESS_KEY" | tr -d '\r' > ~/.ssh/wordpress.pem
           chmod 600 ~/.ssh/wordpress.pem
+          ls -la ~/.ssh
 
       - name: Terraform Plan
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
+          #WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
         run: terraform plan
       
       - name: Terraform Apply
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
-        run: terraform apply -auto-approve
+          #WORDPRESS_KEY: ${{ secrets.WORDPRESS_KEY }}
+        run: terraform apply -auto-approve -var="WORDPRESS_KEY=$(cat ~/.ssh/wordpress.pem)"
 
       
 
