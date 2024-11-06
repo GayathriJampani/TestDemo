@@ -36,6 +36,6 @@ module "wordpress" {
   vpc_id                     = module.vpc.vpc_id
   db_credentials_secret_name = module.rds.db_credentials_secret_arn
   db_host                    = module.rds.db_endpoint
-  private_key_path           = var.private_key_path
+  WORDPRESS_KEY              = var.WORDPRESS_KEY
 
 }
