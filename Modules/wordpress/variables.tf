@@ -39,7 +39,7 @@ variable "db_host" {
   type        = string
 }
 
-variable "private_key_path" {
+variable "WORDPRESS_KEY" {
   description = "privatekey path to private key"
   type        = string
 }
