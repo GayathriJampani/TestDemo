@@ -26,6 +26,7 @@ resource "aws_secretsmanager_secret_version" "db_credentials_version" {
     password = random_password.db_password.result,
     dbname   = var.db_name
   })
+  depends_on = [ aws_secretsmanager_secret.db_credentials ]
 }
 
 # Create a DB subnet group for RDS to specify private subnets
