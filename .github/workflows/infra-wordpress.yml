@@ -80,7 +80,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: terraform destroy -manual-approve -var="WORDPRESS_KEY=$(cat ~/.ssh/wordpress.pem)"
+        run: terraform destroy -auto-approve -var="WORDPRESS_KEY=$(cat ~/.ssh/wordpress.pem)"
 
   prod:
     name: Terraform Deploy to Productions
